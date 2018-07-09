@@ -1,4 +1,4 @@
-package com.yly.testboot.mongoconfig;
+package com.yly.testboot.webconfig;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
