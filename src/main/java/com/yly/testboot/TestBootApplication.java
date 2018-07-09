@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 @SpringBootApplication
@@ -15,6 +16,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 // 目前测试到的是 如果 mongo加入了依赖，同时有地方import，如果没有下面两个配置，那就会报错。
 @EnableJpaRepositories(basePackages = "com.yly.testboot.dao.mysql")
 @EnableMongoRepositories(basePackages = "com.yly.testboot.dao.mongo")
+//spring定时任务
+@EnableScheduling
 //mybatis 扫描Mapper的包路径
 //配置多数据源以后 注释
 //@MapperScan("com.yly.testboot.mapper")
