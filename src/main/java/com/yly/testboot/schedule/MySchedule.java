@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MySchedule {
     private int count = 0;
-    @Scheduled(cron="*/3 * * * * ?")
+    @Scheduled(cron="* * * * * ?")
     private void process(){
-        System.out.println("this is scheduler task runing  "+(count++));
+//        System.out.println("this is scheduler task runing  "+(count++));
     }
 }
