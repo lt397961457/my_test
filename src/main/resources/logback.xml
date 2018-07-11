@@ -55,6 +55,20 @@
         </triggeringPolicy>
     </appender>
 
+    <!-- JSPBEAN 层的日志 -->
+    <appender name="JSP_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/jsp/controller.log.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
     <!-- 不同的包日志打印到指定文件夹-->
     <logger name="com.yly.testboot.testlogger" additivity="false" level="INFO">
         <appender-ref ref="TESTLOGGER_FILE"/>
@@ -63,6 +77,11 @@
 
     <logger name="com.yly.testboot.controller" additivity="false" level="INFO">
         <appender-ref ref="CONTROLLER_FILE"/>
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="com.yly.testboot.jsp" additivity="false" level="INFO">
+        <appender-ref ref="JSP_FILE"/>
         <appender-ref ref="STDOUT" />
     </logger>
 
