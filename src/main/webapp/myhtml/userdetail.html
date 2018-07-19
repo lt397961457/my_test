@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular基础</title>
+</head>
+<body>
+<div ng-app="myApp">
+    <div ng-controller="personCtrl">
+        姓名：<input type="text" ng-model="name"/><br/>
+        年龄：<input type="text" ng-model="age"/><br/>
+        地址：<input type="text" ng-model="addr"/><br/>
+    </div>
+
+</div>
+<script src="angular.min.js"></script>
+<script type="application/javascript">
+    var myApp=angular.module('myApp',[]);
+    myApp.controller('personCtrl',function($scope,$http){
+        $http.get('http://192.168.31.112:8080/first/properties2').
+        success(function(data) {
+            console.log(data);
+            $scope.name=data.myname;
+            $scope.age=data.myage;
+            $scope.addr=data.mylocation;
+        }).
+        error(function(err) {
+            console.log(err);
+        });
+
+        // //$http.post采用postJSON方式发送数据到后台，
+        // // 解决办法：在后台php中使用$postData=file_get_contents("php://input",true);这样就可以获得前端传送过来的数据
+        // var postData={msg:'post的内容'};
+        // var config={params:{id:'5',name:'张三丰'}};
+        // $http.post('postData.php', postData,config).
+        // success(function(data) {
+        //     console.log(data);
+        // }).
+        // error(function(err) {
+        //     //错误代码
+        // });
+        /**
+         * 如果后台禁用了跨域，那么就使用jsonp 访问另外一个特殊处理了的接口
+         * @type {string}
+         */
+        var myUrl ="http://localhost:8080/first/properties3";
+        $http.jsonp(myUrl).success(
+            function(data){
+                console.log(data)
+                    // $scope.name=data.myname;
+                    // $scope.age=data.myage;
+                    // $scope.addr=data.mylocation;
+            }
+        ).error(function(err){
+            //错误代码
+        });
+
+    });
+
+
+</script>
+</body>
+</html>
