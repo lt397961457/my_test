@@ -4,6 +4,7 @@ import com.yly.testboot.util.propertiesutil.MyProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -11,7 +12,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+		DataSourceAutoConfiguration.class
+})
 @EnableConfigurationProperties(MyProperties.class)
 //配置Mysql 与 mongo 不同数据源 ，下面添加Repositories类扫描，两个数据源必须添加，
 // 目前测试到的是 如果 mongo加入了依赖，同时有地方import，如果没有下面两个配置，那就会报错。
